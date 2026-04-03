@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+console.log("ENV CHECK:", process.env.MONGODB_URI);
 type MongooseCache = {
   conn: typeof mongoose | null;
   promise: Promise<typeof mongoose> | null;
