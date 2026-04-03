@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { botDetect } from "../middleware/botDetect";
 import { rateLimit } from "../middleware/rateLimit";
-import { addEventBulk, TrackEventJobData, TrackEventType } from "../queues/eventQueue";
+import { processTrackedEvents, TrackEventInput, TrackEventType } from "../utils/eventProcessor";
 import { getCountry } from "../utils/geoip";
 
 type IncomingEvent = {
@@ -55,7 +55,7 @@ trackRouter.post("/", botDetect, rateLimit, async (req, res) => {
     const country = getCountry(ip);
     const isBot = Boolean(req.isBot);
 
-    const jobs: TrackEventJobData[] = events
+    const jobs: TrackEventInput[] = events
       .filter((event) => typeof event.page === "string" && typeof event.type === "string")
       .map((event) => {
         const normalizedType = allowedTypes.includes(event.type as TrackEventType)
@@ -88,11 +88,11 @@ trackRouter.post("/", botDetect, rateLimit, async (req, res) => {
       return;
     }
 
-    await addEventBulk(jobs);
+    const queued = await processTrackedEvents(jobs);
 
-    res.status(200).json({ received: true, queued: jobs.length });
+    res.status(200).json({ received: true, queued });
   } catch (error) {
-    console.error("[TrackRoute] Failed to enqueue events", error);
-    res.status(500).json({ error: "Failed to enqueue events" });
+    console.error("[TrackRoute] Failed to process events", error);
+    res.status(500).json({ error: "Failed to process events" });
   }
 });

@@ -1,9 +1,9 @@
 # InsightOS Recode 2026
 
-Privacy-first lightweight analytics engine with:
+privacy-first lightweight analytics engine with:
 
 - tracker script for pageviews, clicks, scroll depth, and rage clicks
-- backend event ingestion + queue worker
+- backend event ingestion
 - dashboard for traffic, heatmap, funnel, sessions, and UX signals
 
 ## Project Structure
@@ -62,4 +62,4 @@ Notes:
 
 ## Security Reminder
 
-If real credentials/secrets were committed or shared, rotate them immediately (MongoDB, Redis, JWT, auth password).
+If real credentials/secrets were committed or shared, rotate them immediately (MongoDB, JWT, auth password).

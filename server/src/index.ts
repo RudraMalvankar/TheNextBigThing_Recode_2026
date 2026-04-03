@@ -16,7 +16,6 @@ import { heatmapRouter } from "./routes/heatmap";
 import { sessionsRouter } from "./routes/sessions";
 import { suggestionsRouter } from "./routes/suggestions";
 import { initSocketServer } from "./socket/socketServer";
-import { startEventWorker } from "./workers/eventWorker";
 
 async function bootstrap(): Promise<void> {
   await connectDB();
@@ -63,7 +62,6 @@ async function bootstrap(): Promise<void> {
 
   const server = createServer(app);
   initSocketServer(server);
-  await startEventWorker();
 
   const port = Number(process.env.PORT ?? 4000);
 
