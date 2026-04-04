@@ -6,6 +6,7 @@ yarn-error.log*
 .npm
 .eslintcache
 
+.github/
 # Project Specific
 client/node_modules/
 server/node_modules/
