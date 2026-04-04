@@ -38,16 +38,10 @@ async function start() {
   });
 
   // 🔥 CORS FIX (FINAL)
-  app.use(
-    cors({
-      origin: [
-        "https://the-next-big-thing-recode-2026.vercel.app",
-        "https://rudramalvankar.netlify.app"
-      ],
-      methods: ["GET", "POST", "PUT", "DELETE"],
-      credentials: true
-    })
-  );
+  app.use(cors({
+  origin: "*",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+}));
 
   app.use(express.json({ limit: "1mb" }));
   app.use(cookieParser());
