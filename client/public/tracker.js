@@ -6,7 +6,7 @@
   "use strict";
   var d=document, w=window, n=navigator, l=location;
   var s=d.currentScript, siteId=s?s.getAttribute("data-site"):"default";
-  var API = s ? (s.getAttribute("data-api") || new URL(s.src).origin) : "http://localhost:4001";
+  var API = s ? (s.getAttribute("data-api") || new URL(s.src).origin) : "https://thenextbigthing-recode-2026-1.onrender.com/api/track";
   var sid=sessionStorage.getItem("_isid")||(function(){var id=crypto.randomUUID();sessionStorage.setItem("_isid",id);return id})();
   
   var q=[], rq=[], ps=Date.now(), flushTimer=null, replayWorker=null;
